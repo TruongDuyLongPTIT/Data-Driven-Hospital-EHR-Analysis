@@ -18,7 +18,7 @@ def check_connection():
         print(f"❌ Không thể kết nối PostgreSQL: {e}")
         return False
 
-def import_csv_sample(file_path, table_name, n_rows=100):
+def import_csv_sample(file_path, table_name, n_rows=1000):
     """
     Chỉ đọc n_rows đầu tiên để import vào Postgres
     """
@@ -50,7 +50,7 @@ def import_csv_sample(file_path, table_name, n_rows=100):
 
 if __name__ == "__main__":
 
-    folder = r"C:\DataUser\MIMIC Dataset\mimic-iv-note-deidentified-free-text-clinical-notes-2.2\note"
+    folder = r"C:\DataUser\MIMIC Dataset\mimic-iv-3.1\icu"
 
     if check_connection():
         files = glob.glob(os.path.join(folder, "*.csv.gz"))
@@ -60,4 +60,4 @@ if __name__ == "__main__":
 
         for file_path in files:
             table_name = os.path.splitext(os.path.splitext(os.path.basename(file_path))[0])[0]
-            import_csv_sample(file_path, table_name, n_rows=100)
+            import_csv_sample(file_path, table_name, n_rows=200000)
