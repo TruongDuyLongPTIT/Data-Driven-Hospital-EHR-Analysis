@@ -29,7 +29,7 @@ def import_csv_sample(file_path, table_name, n_rows=1000):
     try:
         df = pl.read_csv(
             file_path,
-            n_rows=n_rows,
+            #n_rows=n_rows,
             infer_schema_length=n_rows,      # đoán kiểu dựa trên sample
             null_values=common_nulls,
             ignore_errors=True               # bỏ qua giá trị không parse được
@@ -53,7 +53,7 @@ if __name__ == "__main__":
     folder = r"C:\DataUser\MIMIC Dataset\mimic-iv-3.1\icu"
 
     if check_connection():
-        files = glob.glob(os.path.join(folder, "*.csv.gz"))
+        files = glob.glob(os.path.join(r"C:\DataUser\MIMIC Dataset\mimic-iv-3.1\hosp\poe_detail.csv.gz"))
         if not files:
             print("❌ Không tìm thấy file .csv.gz trong folder.")
             exit(1)
