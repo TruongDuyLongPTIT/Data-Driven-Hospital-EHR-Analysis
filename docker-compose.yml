@@ -1,6 +1,111 @@
-version: '3.8'
-
 services:
+  # ------------------ Spark Master ------------------
+  spark-master:
+    image: bitnami/spark:latest
+    container_name: spark-master
+    hostname: spark-master
+    environment:
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+    ports:
+      - "8080:8080"   # Spark Web UI
+      - "7077:7077"   # Spark Master Port
+    networks:
+      - spark-net
+    volumes:
+    - ./data:/opt/bitnami/spark/data
+
+
+  # ------------------ Spark Workers ------------------
+  spark-worker-1:
+    image: bitnami/spark:latest
+    container_name: spark-worker-1
+    hostname: spark-worker-1
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+    depends_on:
+      - spark-master
+    ports:
+      - "8081:8081"
+    networks:
+      - spark-net
+
+  spark-worker-2:
+    image: bitnami/spark:latest
+    container_name: spark-worker-2
+    hostname: spark-worker-2
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+    depends_on:
+      - spark-master
+    ports:
+      - "8082:8081"
+    networks:
+      - spark-net
+
+  spark-worker-3:
+    image: bitnami/spark:latest
+    container_name: spark-worker-3
+    hostname: spark-worker-3
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+    depends_on:
+      - spark-master
+    ports:
+      - "8083:8081"
+    networks:
+      - spark-net
+
+  # ------------------ MinIO Cluster (3 Nodes) ------------------
+  minio1:
+    image: quay.io/minio/minio:latest
+    container_name: minio1
+    hostname: minio1
+    volumes:
+      - minio1-data:/data
+    environment:
+      - MINIO_ROOT_USER=minio
+      - MINIO_ROOT_PASSWORD=minio123
+    command: ["server", "http://minio{1...3}/data", "--console-address", ":9001"]
+    ports:
+      - "9001:9001"
+      - "9000:9000"
+    networks:
+      - spark-net
+
+  minio2:
+    image: quay.io/minio/minio:latest
+    container_name: minio2
+    hostname: minio2
+    volumes:
+      - minio2-data:/data
+    environment:
+      - MINIO_ROOT_USER=minio
+      - MINIO_ROOT_PASSWORD=minio123
+    command: ["server", "http://minio{1...3}/data"]
+    networks:
+      - spark-net
+
+  minio3:
+    image: quay.io/minio/minio:latest
+    container_name: minio3
+    hostname: minio3
+    volumes:
+      - minio3-data:/data
+    environment:
+      - MINIO_ROOT_USER=minio
+      - MINIO_ROOT_PASSWORD=minio123
+    command: ["server", "http://minio{1...3}/data"]
+    networks:
+      - spark-net
+      
+    # ------------------ Postgres DB ------------------
   postgres:
     image: postgres:15
     container_name: postgres_db
@@ -15,39 +120,26 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./init-scripts:/docker-entrypoint-initdb.d
+      - "C:/DataUser/MIMIC Dataset/mimic-iv-3.1/hosp:/csv"
     networks:
-      - postgres_network
+      - spark-net
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d myapp_db"]
+      test: ["CMD-SHELL", "pg_isready -U admin -d myapp_db"]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 30s
 
-  # Tùy chọn: pgAdmin để quản lý database qua web UI
-  pgadmin:
-    image: dpage/pgadmin4:latest
-    container_name: pgadmin
-    restart: unless-stopped
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-    ports:
-      - "8080:80"
-    volumes:
-      - pgadmin_data:/var/lib/pgadmin
-    networks:
-      - postgres_network
-    depends_on:
-      postgres:
-        condition: service_healthy
 
 volumes:
+  minio1-data:
+  minio2-data:
+  minio3-data:
   postgres_data:
     driver: local
   pgadmin_data:
     driver: local
 
 networks:
-  postgres_network:
+  spark-net:
     driver: bridge
