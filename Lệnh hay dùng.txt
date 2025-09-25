@@ -1,0 +1,81 @@
+Lệnh copy từ local sang container: docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\scripts\Ingest.py" spark-master:/opt/bitnami/spark/scripts
+
+Lệnh spark-submit để chuyển code: /opt/bitnami/spark/bin/spark-submit --master spark://spark-master:7077  /opt/bitnami/spark/scripts/Ingest.py
+
+Lệnh đẩy data từ .csv vào các bảng được tạo sẵn trong postgres: psql -U admin -d postgres -c "\copy drgcodes FROM '/csv/drgcodes.csv' CSV HEADER" (đã map folder chứa các file .csv ở local vào đường dẫn /csv trong postgres container)
+
+
+1 cách check nội dung của file nặng nhanh (trên Win) .> mở PowerShell gõ: Get-Content "C:\DataUser\MIMIC Dataset\mimic-iv-3.1\hosp\chartevents.csv" -Tail 10
+
+
+psql -U admin -d postgres -c "\copy transfers FROM '/csv/transfers.csv' CSV HEADER"
+
+docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\scripts\Extract\ingest_mimic.py" spark-master:/opt/bitnami/spark/code
+docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\scripts\Extract\config.py" spark-master:/opt/bitnami/spark/code
+docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\spark-jars\aws-java-sdk-bundle-1.12.262.jar" spark-master:/opt/bitnami/spark/spark-jars
+docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\spark-jars\hadoop-aws-3.3.4.jar" spark-master:/opt/bitnami/spark/spark-jars
+docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\spark-jars\iceberg-spark-runtime-3.5_2.12-1.4.3.jar" spark-master:/opt/bitnami/spark/spark-jars
+
+
+docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\iceberg-spark-runtime-4.0_2.13-1.10.0.jar" spark-master:/opt/bitnami/spark/jars
+
+
+/opt/bitnami/spark/bin/spark-submit --master spark://spark-master:7077 --conf spark.jars.ivy=/tmp/.ivy2 --packages org.apache.iceberg:iceberg-spark-runtime-4.0_2.12:1.6.0, org.postgresql:postgresql:42.7.3 --py-files /opt/bitnami/spark/code/config.py /opt/bitnami/spark/code/ingest_mimic.py
+
+/opt/bitnami/spark/bin/spark-submit --master spark://spark-master:7077 --conf spark.jars.ivy=/tmp/.ivy2 --packages org.postgresql:postgresql:42.7.3 --py-files /opt/bitnami/spark/code/config.py /opt/bitnami/spark/code/ingest_mimic.py
+
+
+/opt/bitnami/spark/bin/spark-submit \
+  --master spark://spark-master:7077 \
+  --packages \
+org.postgresql:postgresql:42.7.3,\
+org.apache.iceberg:iceberg-spark-runtime-3.5_2.12:1.5.2,\
+org.apache.hadoop:hadoop-aws:3.3.4,\
+com.amazonaws:aws-java-sdk-bundle:1.12.262 \
+  --py-files /opt/bitnami/spark/scripts/config.py \
+  /opt/bitnami/spark/scripts/ingest_mimic.py
+
+
+/opt/bitnami/spark/bin/spark-submit \
+  --master spark://spark-master:7077 \
+  --conf spark.jars.ivy=/tmp/.ivy2 \
+  --jars /opt/bitnami/spark/jars/iceberg-spark-runtime-4.0_2.13-1.10.0.jar \
+  --packages org.postgresql:postgresql:42.7.3 \
+  --py-files /opt/bitnami/spark/code/config.py \
+  /opt/bitnami/spark/code/ingest_mimic.py
+
+
+/opt/bitnami/spark/bin/spark-submit \
+  --master spark://spark-master:7077 \
+  --jars /opt/bitnami/spark/spark-jars/iceberg-spark-runtime-3.5_2.12-1.4.3.jar,/opt/bitnami/spark/ivy/hadoop-aws-3.3.4.jar,/opt/bitnami/spark/ivy/aws-java-sdk-bundle-1.12.262.jar \
+  --packages org.postgresql:postgresql:42.7.3 \
+  --conf spark.jars.ivy=/tmp/.ivy2 \
+  --conf spark.sql.extensions=org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions \
+  --conf spark.sql.catalog.mimic=org.apache.iceberg.spark.SparkCatalog \
+  --conf spark.sql.catalog.mimic.type=hadoop \
+  --conf spark.sql.catalog.mimic.warehouse=s3a://minio-lakehouse/warehouse/ \
+  --conf spark.hadoop.fs.s3a.endpoint=http://minio1:9000 \
+  --conf spark.hadoop.fs.s3a.access.key=minio \
+  --conf spark.hadoop.fs.s3a.secret.key=minio123 \
+  --conf spark.hadoop.fs.s3a.path.style.access=true \
+  --conf spark.hadoop.fs.s3a.impl=org.apache.hadoop.fs.s3a.S3AFileSystem \
+  --py-files /opt/bitnami/spark/code/config.py \
+  /opt/bitnami/spark/code/ingest_mimic.py
+  
+/opt/bitnami/spark/bin/spark-submit \
+  --executor-memory 4G \
+  --driver-memory 4G \
+  --conf spark.executor.cores=2 \
+  --conf spark.executor.instances=3 \
+  --master spark://spark-master:7077 \
+  --packages org.postgresql:postgresql:42.7.3 \
+  --py-files /opt/bitnami/spark/code/config.py \
+  /opt/bitnami/spark/code/ingest_mimic.py
+  
+  
+chartevents - 6 core - 600 partition - 750s
+chartevents - 3 core - 600 partition - 1200s 
+chartevents - 3 core - 30 partition - 1200s 
+chartevents - 3 core - 300 partition - 1200s 
+
+
