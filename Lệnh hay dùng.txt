@@ -65,7 +65,7 @@ com.amazonaws:aws-java-sdk-bundle:1.12.262 \
 /opt/bitnami/spark/bin/spark-submit \
   --executor-memory 4G \
   --driver-memory 4G \
-  --conf spark.executor.cores=2 \
+  --conf spark.executor.cores=1 \
   --conf spark.executor.instances=3 \
   --master spark://spark-master:7077 \
   --packages org.postgresql:postgresql:42.7.3 \
@@ -79,3 +79,12 @@ chartevents - 3 core - 30 partition - 1200s
 chartevents - 3 core - 300 partition - 1200s 
 
 
+Xem thành phần chiếm dung lượng trong docker: docker system df -v
+
+git rm --cached spark-jars/aws-java-sdk-bundle-1.12.262.jar spark-jars/hadoop-aws-3.3.4.jar spark-jars/iceberg-spark-runtime-3.5_2.12-1.4.3.jar
+
+
+Lệnh git:
+git reset --soft HEAD~1 nếu chỉ muốn clear commit vừa rồi để quay lại trạng thái sau khi git add (chưa commit)
+git reset --mixed HEAD~1 nếu xoá luôn cả commit vừa rồi và cả những file đã add vào staging, chỉ giữ thay đổi ở working directory (giống như vừa mới sửa file thôi, chưa add, chưa commit)
+git reset --hard HEAD~1 nếu xoá luôn cả thay đổi trong working directory (quay về đúng như trước khi commit, coi như chưa hề sửa gì)

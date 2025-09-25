@@ -1,0 +1,14 @@
+# Java/Scala binaries
+*.jar
+
+# Spark jars
+spark-jars/
+
+# Python caches
+__pycache__/
+*.pyc
+
+# Local data
+data/
+*.parquet
+
