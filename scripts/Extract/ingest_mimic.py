@@ -23,8 +23,8 @@ class MimicIngestion:
             logger.error(f"Error creating bucket: {e}")
 
     def ingest_table(self, table_name):
-        self.spark.stop()
-        self.spark = create_spark_session()
+        #self.spark.stop()
+        #self.spark = create_spark_session()
         """Ingest single table"""
         try:
             logger.info(f"🚀 Starting ingestion for table: {table_name}")
@@ -57,6 +57,7 @@ class MimicIngestion:
             df = self.spark.read.format("jdbc").options(**jdbc_options).load()
             
             # Add metadata columns
+            # ingestion_timestamp để về sau thử cách check thêm/sửa/xóa dựa trên ingest time
             df = df.withColumn("ingestion_timestamp", current_timestamp()) \
                    .withColumn("source_system", lit("mimic4")) \
                    .withColumn("table_name", lit(table_name))
@@ -68,10 +69,23 @@ class MimicIngestion:
             # Write to MinIO Bronze layer
             output_path = f"{MINIO_CONFIG['bronze_path']}/{table_name}"
 
-            df.write.mode("overwrite") \
-            .format("parquet") \
-            .option("path", output_path) \
-            .save()
+<<<<<<< HEAD
+            # Ghi vào minIO với iceberg - quản lý bảng
+            df.write \
+                .format("iceberg") \
+                .mode("overwrite") \
+=======
+            # df.write.mode("overwrite") \
+            # .format("parquet") \
+            # .option("path", output_path) \
+            # .save()
+
+            # Ghi vào minIO với iceberg - quản lý bảng
+            df.write \
+                .format("iceberg") \
+                .mode("append") \
+>>>>>>> 6586a69ee0b67430d94871a3046d9fa38d12ce86
+                .saveAsTable(f"bronze.{table_name}")
 
             
             end_time = time.time()
@@ -87,7 +101,7 @@ class MimicIngestion:
             import gc
             gc.collect()
 
-            self.spark.stop()
+            #self.spark.stop()
 
             return {
                 "table": table_name,
@@ -142,7 +156,7 @@ class MimicIngestion:
         for r in successful:
             total_records += r['records']
         
-        print(f"⏱️  Total Duration: {total_duration:.2f} seconds")
+        print(f"⏱️ Total Duration: {total_duration:.2f} seconds")
         print(f"📊 Tables Processed: {len(results_list)}")
         print(f"✅ Successful: {len(successful)}")
         print(f"❌ Failed: {len(failed)}")

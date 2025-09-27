@@ -12,12 +12,23 @@ psql -U admin -d postgres -c "\copy transfers FROM '/csv/transfers.csv' CSV HEAD
 
 docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\scripts\Extract\ingest_mimic.py" spark-master:/opt/bitnami/spark/code
 docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\scripts\Extract\config.py" spark-master:/opt/bitnami/spark/code
-docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\spark-jars\aws-java-sdk-bundle-1.12.262.jar" spark-master:/opt/bitnami/spark/spark-jars
-docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\spark-jars\hadoop-aws-3.3.4.jar" spark-master:/opt/bitnami/spark/spark-jars
-docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\spark-jars\iceberg-spark-runtime-3.5_2.12-1.4.3.jar" spark-master:/opt/bitnami/spark/spark-jars
+
+docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\scripts\Transform\time_normalization.py" spark-master:/opt/bitnami/spark/code
+docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\scripts\Transform\d_items_transform.py" spark-master:/opt/bitnami/spark/code
+docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\scripts\Transform\patients_transform.py" spark-master:/opt/bitnami/spark/code
+docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\scripts\Transform\icustays_transform.py" spark-master:/opt/bitnami/spark/code
+docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\scripts\Transform\chartevents_transform.py" spark-master:/opt/bitnami/spark/code
+
+docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\scripts\Load\dimTime.py" spark-master:/opt/bitnami/spark/code
+docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\scripts\Load\dimEventType.py" spark-master:/opt/bitnami/spark/code
+docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\scripts\Load\dimPatients.py" spark-master:/opt/bitnami/spark/code
 
 
-docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\iceberg-spark-runtime-4.0_2.13-1.10.0.jar" spark-master:/opt/bitnami/spark/jars
+docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\spark-jars\aws-java-sdk-bundle-1.12.262.jar" spark-master:/opt/bitnami/spark/jars
+docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\spark-jars\hadoop-aws-3.3.4.jar" spark-master:/opt/bitnami/spark/jars
+docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\spark-jars\iceberg-spark-runtime-3.5_2.12-1.4.3.jar" spark-master:/opt/bitnami/spark/jars
+
+
 
 
 /opt/bitnami/spark/bin/spark-submit --master spark://spark-master:7077 --conf spark.jars.ivy=/tmp/.ivy2 --packages org.apache.iceberg:iceberg-spark-runtime-4.0_2.12:1.6.0, org.postgresql:postgresql:42.7.3 --py-files /opt/bitnami/spark/code/config.py /opt/bitnami/spark/code/ingest_mimic.py
@@ -68,9 +79,21 @@ com.amazonaws:aws-java-sdk-bundle:1.12.262 \
   --conf spark.executor.cores=1 \
   --conf spark.executor.instances=3 \
   --master spark://spark-master:7077 \
+  --jars /opt/bitnami/spark/jars/iceberg-spark-runtime-3.5_2.12-1.4.3.jar \
   --packages org.postgresql:postgresql:42.7.3 \
   --py-files /opt/bitnami/spark/code/config.py \
   /opt/bitnami/spark/code/ingest_mimic.py
+  
+  
+/opt/bitnami/spark/bin/spark-submit \
+  --executor-memory 4G \
+  --driver-memory 4G \
+  --conf spark.executor.cores=1 \
+  --conf spark.executor.instances=3 \
+  --master spark://spark-master:7077 \
+  --jars /opt/bitnami/spark/jars/iceberg-spark-runtime-3.5_2.12-1.4.3.jar \
+  --packages org.postgresql:postgresql:42.7.3 \
+  /opt/bitnami/spark/code/dimPatients.py
   
   
 chartevents - 6 core - 600 partition - 750s

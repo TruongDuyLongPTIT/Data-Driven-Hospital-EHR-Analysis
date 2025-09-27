@@ -242,6 +242,19 @@ def create_spark_session():
     conf.set("spark.sql.adaptive.enabled", "true")
     conf.set("spark.sql.adaptive.coalescePartitions.enable", "true")
 
+    # Iceberg configuration
+    conf.set("spark.sql.catalog.bronze", "org.apache.iceberg.spark.SparkCatalog")
+    conf.set("spark.sql.catalog.bronze.type", "hadoop")
+    conf.set("spark.sql.catalog.bronze.warehouse", "s3a://mimic-lakehouse/bronze")
+
+    conf.set("spark.sql.catalog.silver", "org.apache.iceberg.spark.SparkCatalog")
+    conf.set("spark.sql.catalog.silver.type", "hadoop")
+    conf.set("spark.sql.catalog.silver.warehouse", "s3a://mimic-lakehouse/silver")
+
+    conf.set("spark.sql.catalog.gold", "org.apache.iceberg.spark.SparkCatalog")
+    conf.set("spark.sql.catalog.gold.type", "hadoop")
+    conf.set("spark.sql.catalog.gold.warehouse", "s3a://mimic-lakehouse/gold")
+    
     # MinIO S3 Configuration
     conf.set("spark.hadoop.fs.s3a.endpoint", "http://minio1:9000")
     conf.set("spark.hadoop.fs.s3a.access.key", "minio")
