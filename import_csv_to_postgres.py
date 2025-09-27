@@ -35,6 +35,7 @@ MIMIC_TABLES = [
     "transfers"
 ]
 
+
 conn = psycopg2.connect("dbname=postgres user=admin password=admin host=localhost")
 cur = conn.cursor()
 
