@@ -1,16 +1,11 @@
-<<<<<<< HEAD
 from config import create_spark_session
 from time_normalization import normalize_time
 from pyspark.sql.functions import trim, col, concat, date_format, year
-=======
-from config import create_spark_session, TABLE_CONFIG
-from pyspark.sql.functions import trim, col
->>>>>>> 6586a69ee0b67430d94871a3046d9fa38d12ce86
+
 
 def transform_chartevents():
     # Tạo Spark Session
     spark = create_spark_session()
-<<<<<<< HEAD
 
 
     print("🚀 chartevents table processing...")
@@ -53,7 +48,6 @@ def transform_chartevents():
     print("📊In silver")
     spark.sql("SELECT * FROM silver.chartevents LIMIT 100").show()
     # Shutdown Spark Session
-=======
     
     # Test 1: 1 file
     # df1 = spark.read.parquet("bronze.chartevents.data.00000-201-cb7a543f-867b-49df-9296-1a885053ab8f-00001.parquet")
@@ -70,7 +64,6 @@ def transform_chartevents():
 
     df3.dropDuplicates().collect()  # Xem Spark UI -> sẽ thấy nhiều task hơn
     
->>>>>>> 6586a69ee0b67430d94871a3046d9fa38d12ce86
     spark.stop()
 
 

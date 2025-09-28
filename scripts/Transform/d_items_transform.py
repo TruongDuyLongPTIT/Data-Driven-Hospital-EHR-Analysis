@@ -53,11 +53,7 @@ def transform_d_items():
 
     df_d_items.write \
             .format("iceberg") \
-<<<<<<< HEAD
             .mode("overwrite") \
-=======
-            .mode("append") \
->>>>>>> 6586a69ee0b67430d94871a3046d9fa38d12ce86
             .saveAsTable("silver.d_items")
     
     spark.table("silver.d_items").show()

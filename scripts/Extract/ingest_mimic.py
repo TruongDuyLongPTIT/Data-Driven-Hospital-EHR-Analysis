@@ -23,8 +23,9 @@ class MimicIngestion:
             logger.error(f"Error creating bucket: {e}")
 
     def ingest_table(self, table_name):
-        #self.spark.stop()
-        #self.spark = create_spark_session()
+        # Restart Spark Session
+        self.spark.stop()
+        self.spark = create_spark_session()
         """Ingest single table"""
         try:
             logger.info(f"🚀 Starting ingestion for table: {table_name}")
