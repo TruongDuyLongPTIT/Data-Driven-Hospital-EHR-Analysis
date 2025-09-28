@@ -67,8 +67,6 @@ class MimicIngestion:
             logger.info(f"📊 Extracted {record_count:,} records from {table_name}")
             
             # Write to MinIO Bronze layer
-            output_path = f"{MINIO_CONFIG['bronze_path']}/{table_name}"
-
             df.write \
                 .format("iceberg") \
                 .mode("overwrite") \
