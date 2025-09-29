@@ -22,6 +22,8 @@ docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\scripts\Transform\chart
 docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\scripts\Load\dimTime.py" spark-master:/opt/bitnami/spark/code
 docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\scripts\Load\dimEventType.py" spark-master:/opt/bitnami/spark/code
 docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\scripts\Load\dimPatients.py" spark-master:/opt/bitnami/spark/code
+docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\scripts\Load\dimICUStay.py" spark-master:/opt/bitnami/spark/code
+docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\scripts\Load\factICUVitalSignEvent.py" spark-master:/opt/bitnami/spark/code
 
 
 docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\spark-jars\aws-java-sdk-bundle-1.12.262.jar" spark-master:/opt/bitnami/spark/jars
@@ -93,7 +95,7 @@ com.amazonaws:aws-java-sdk-bundle:1.12.262 \
   --master spark://spark-master:7077 \
   --jars /opt/bitnami/spark/jars/iceberg-spark-runtime-3.5_2.12-1.4.3.jar \
   --packages org.postgresql:postgresql:42.7.3 \
-  /opt/bitnami/spark/code/dimPatients.py
+  /opt/bitnami/spark/code/factICUVitalSignEvent.py
   
   
 chartevents - 6 core - 600 partition - 750s

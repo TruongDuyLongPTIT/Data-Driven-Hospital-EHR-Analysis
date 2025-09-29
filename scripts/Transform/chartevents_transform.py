@@ -47,23 +47,22 @@ def transform_chartevents():
     spark.sql("SELECT * FROM bronze.chartevents LIMIT 100").show()
     print("📊In silver")
     spark.sql("SELECT * FROM silver.chartevents LIMIT 100").show()
-    # Shutdown Spark Session
     
     # Test 1: 1 file
     # df1 = spark.read.parquet("bronze.chartevents.data.00000-201-cb7a543f-867b-49df-9296-1a885053ab8f-00001.parquet")
     # df1.dropDuplicates().collect()  # Xem Spark UI -> sẽ thấy ít task
 
     # Test 2: 3 files  
-    df3 = spark.read.parquet(
-        *[
-            "s3a://mimic-lakehouse/bronze/chartevents/data/00000-201-cb7a543f-867b-49df-9296-1a885053ab8f-00001.parquet",
-            "s3a://mimic-lakehouse/bronze/chartevents/data/00001-202-cb7a543f-867b-49df-9296-1a885053ab8f-00001.parquet",
-            "s3a://mimic-lakehouse/bronze/chartevents/data/00002-203-cb7a543f-867b-49df-9296-1a885053ab8f-00001.parquet"
-        ]
-    )
+    # df3 = spark.read.parquet(
+    #     *[
+    #         "s3a://mimic-lakehouse/bronze/chartevents/data/00000-201-cb7a543f-867b-49df-9296-1a885053ab8f-00001.parquet",
+    #         "s3a://mimic-lakehouse/bronze/chartevents/data/00001-202-cb7a543f-867b-49df-9296-1a885053ab8f-00001.parquet",
+    #         "s3a://mimic-lakehouse/bronze/chartevents/data/00002-203-cb7a543f-867b-49df-9296-1a885053ab8f-00001.parquet"
+    #     ]
+    # )
 
-    df3.dropDuplicates().collect()  # Xem Spark UI -> sẽ thấy nhiều task hơn
-    
+    # df3.dropDuplicates().collect()  # Xem Spark UI -> sẽ thấy nhiều task hơn
+    # Shutdown Spark Session
     spark.stop()
 
 
