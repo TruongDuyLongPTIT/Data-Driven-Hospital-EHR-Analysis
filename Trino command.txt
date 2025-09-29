@@ -1,0 +1,56 @@
+-- Kết nối vào Trino
+docker exec -it trino trino
+
+-- Show các catalogs
+SHOW CATALOGS;
+
+-- Show các schemas trong catalogs
+SHOW SCHEMAS in iceberg; (iceberg là tên catalogs)
+
+-- Create 1 schema mới tên là mimic_trino
+CREATE SCHEMA iceberg.mimic_trino;
+
+-- Sử dụng schema mimic
+USE iceberg.mimic_trino;
+
+-- Register vào đúng schema mimic_trino
+CALL iceberg.system.register_table(
+    schema_name => 'mimic_trino',
+    table_name => 'fact_icu_vital_sign_event',
+    table_location => 's3://mimic-lakehouse/gold/factICUVitalSignEvent'
+);
+
+CALL iceberg.system.register_table(
+    schema_name => 'mimic_trino',
+    table_name => 'dim_time',
+    table_location => 's3://mimic-lakehouse/gold/dim_time'
+);
+
+CALL iceberg.system.register_table(
+    schema_name => 'mimic_trino',
+    table_name => 'dim_event_type',
+    table_location => 's3://mimic-lakehouse/gold/dimEventType'
+);
+
+CALL iceberg.system.register_table(
+    schema_name => 'mimic_trino',
+    table_name => 'dim_icu_stay',
+    table_location => 's3://mimic-lakehouse/gold/dimICUStay'
+);
+
+CALL iceberg.system.register_table(
+    schema_name => 'mimic_trino',
+    table_name => 'dim_patient',
+    table_location => 's3://mimic-lakehouse/gold/dimPatient'
+);
+
+-- Kiểm tra lại
+SHOW TABLES IN iceberg.mimic_trino;
+
+-- Test query
+SELECT * FROM fact_icu_vital_sign_event LIMIT 5;
+
+
+
+------------ Connect Trino with Tableau---------
+jdbc:trino://localhost:8084/iceberg/mimic_trino
