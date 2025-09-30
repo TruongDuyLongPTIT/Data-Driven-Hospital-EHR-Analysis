@@ -18,7 +18,6 @@ def createFactICUVitalSignEvent():
         WHERE itemid IN (220045, 220050, 220051, 220052, 220277)
     """)
 
-
     # Đọc từ table
     df = spark.sql("""
         SELECT 
