@@ -7,8 +7,7 @@ def createDimEventType():
     spark.sql("""
         CREATE OR REPLACE TABLE gold.dimEventType AS
         SELECT 
-            row_number() OVER (ORDER BY itemid) as eventtypeSK,
-            itemid as itemid_eventtypeDK,
+            itemid,
             label as vital_sign_type,
             lownormalvalue,
             highnormalvalue
@@ -20,7 +19,7 @@ def createDimEventType():
     print("🚀🚀🚀🚀🚀🚀 Print dimEventType")
     df = spark.sql("""
         SELECT * FROM gold.dimEventType
-        WHERE itemid_eventtypeDK in (220045, 220050, 220051, 220052, 220277)
+        WHERE itemid in (220045, 220050, 220051, 220052, 220277)
     """)
     df.show(100)
 

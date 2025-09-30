@@ -254,7 +254,7 @@ def quick_test():
         conn = psycopg2.connect("dbname=postgres user=admin password=admin host=localhost port=5432")
         cur = conn.cursor()
         
-        table_name = "patients"
+        table_name = "icustays"
         file_path = f"C:/DataUser/MIMIC Dataset/mimic-iv-3.1/hosp/{table_name}.csv.gz"
         
         if check_file_exists(file_path):

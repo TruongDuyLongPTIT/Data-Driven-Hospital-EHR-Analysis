@@ -7,8 +7,7 @@ def createDimPatients():
     spark.sql("""
         CREATE OR REPLACE TABLE gold.dimPatient AS
         SELECT 
-            row_number() OVER (ORDER BY subject_id) as patientSK,
-            subject_id as patientDK,
+            subject_id,
             gender,
             anchor_age as age
         FROM silver.patients 

@@ -7,8 +7,7 @@ def createDimICUStay():
     spark.sql("""
         CREATE OR REPLACE TABLE gold.dimICUStay AS
         SELECT 
-            row_number() OVER (ORDER BY stay_id) as ICUStaySK,
-            stay_id as stay_id_ICUStayDK,
+            stay_id,
             first_careunit as ICU_room_name,
             intime,
             outtime

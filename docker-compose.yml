@@ -149,47 +149,6 @@ services:
     networks:
       - spark-net
 
-  # Trino 
-  trino-coordinator:
-    image: 'trinodb/trino:422'
-    hostname: trino-coordinator
-    container_name: trino-coordinator
-    ports:
-      - '8088:8080'
-    volumes:
-      - ./etc:/etc/trino
-    networks:
-      - spark-net
-      
-  mariadb:
-    image: 'mariadb:10.3.32'
-    hostname: mariadb
-    container_name: mariadb
-    ports:
-      - '3306:3306'
-    environment:
-      MYSQL_ROOT_PASSWORD: admin
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: admin
-      MYSQL_DATABASE: metastore_db
-    networks:
-      - spark-net
-
-
-  hive-metastore:
-    image: 'bitsondatadev/hive-metastore:latest'
-    hostname: hive-metastore
-    container_name: hive-metastore
-    ports:
-      - '9083:9083' # Metastore Thrift
-    volumes:
-      - ./conf/metastore-site.xml:/opt/apache-hive-metastore-3.0.0-bin/conf/metastore-site.xml:ro
-    environment:
-      METASTORE_DB_HOSTNAME: mariadb
-    depends_on:
-      - mariadb
-    networks:
-      - spark-net
   # ------------------ Airflow (Standalone) ------------------
   airflow:
     image: apache/airflow:2.8.1-python3.11

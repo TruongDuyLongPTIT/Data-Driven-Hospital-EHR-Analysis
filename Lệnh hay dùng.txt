@@ -95,8 +95,13 @@ com.amazonaws:aws-java-sdk-bundle:1.12.262 \
   --master spark://spark-master:7077 \
   --jars /opt/bitnami/spark/jars/iceberg-spark-runtime-3.5_2.12-1.4.3.jar \
   --packages org.postgresql:postgresql:42.7.3 \
-  /opt/bitnami/spark/code/factICUVitalSignEvent.py
+  /opt/bitnami/spark/code/dimTime.py
   
+  dimTime
+  dimEventType
+  dimPatients
+  dimICUStay
+  factICUVitalSignEvent
   
 chartevents - 6 core - 600 partition - 750s
 chartevents - 3 core - 600 partition - 1200s 

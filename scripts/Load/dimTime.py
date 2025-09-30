@@ -25,23 +25,8 @@ def dimTime():
         EXTRACT(YEAR FROM full_datetime) AS year,
         EXTRACT(MONTH FROM full_datetime) AS month,
         EXTRACT(DAY FROM full_datetime) AS day_of_month,
-        date_format(full_datetime, 'HH:mm') AS hour_minute,
         EXTRACT(HOUR FROM full_datetime) AS hour,
         EXTRACT(MINUTE FROM full_datetime) AS minute,
-        EXTRACT(QUARTER FROM full_datetime) AS quarter,
-        EXTRACT(DAYOFWEEK FROM full_datetime) AS day_of_week,
-        date_format(full_datetime, 'EEEE') AS day_name,
-        date_format(full_datetime, 'MMMM') AS month_name,
-        CASE 
-            WHEN EXTRACT(DAYOFWEEK FROM full_datetime) IN (1, 7) THEN 'Weekend'
-            ELSE 'Weekday'
-        END AS day_type,
-        CASE
-            WHEN EXTRACT(HOUR FROM full_datetime) BETWEEN 6 AND 11 THEN 'Morning'
-            WHEN EXTRACT(HOUR FROM full_datetime) BETWEEN 12 AND 17 THEN 'Afternoon'  
-            WHEN EXTRACT(HOUR FROM full_datetime) BETWEEN 18 AND 21 THEN 'Evening'
-            ELSE 'Night'
-        END AS time_of_day,
         full_datetime
     FROM times
     ORDER BY full_datetime
