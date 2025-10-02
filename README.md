@@ -150,8 +150,24 @@ Healthcare-Data-Driven-Hospital-EHR-Analysis/
 
 </details>
 
-## 🚀 Getting Started
-1. **Download Dataset**.
-    + Bạn có thể download bộ dữ liệu [tại đây](https://physionet.org/content/mimiciv/).
+## 🚑 Getting Started
+1. **Download Dataset**
+  <pre>
+    Download dataset on link: https://physionet.org/content/mimiciv/</pre>
 2. **Clone my repository**
-<pre>git clone https://github.com/TruongDuyLongPTIT/Healthcare-Data-Driven-Hospital-EHR-Analysis.git</pre>
+  <pre>
+    git clone https://github.com/TruongDuyLongPTIT/Healthcare-Data-Driven-Hospital-EHR-Analysis.git</pre>
+3. **Download JAR files for Spark**
+  <pre>
+    aws-java-sdk-bundle-1.12.262.jar
+    hadoop-aws-3.3.4.jar
+    iceberg-spark-runtime-3.5_2.12-1.6.0.jar</pre>
+5. **Start and Stop**
+  <pre>
+    Double-click start.bat file to start all docker container
+    Similar, double-click stop.bat to shut-down all docker containers.</pre>
+6. **Run pipeline**
+  <pre>
+    Now, I running scripts manually.
+    But, I will use Airflow to schedule running time (Comming soon...)</pre>
+## 🩺 Guide for you
