@@ -27,6 +27,7 @@ def dimTime():
         EXTRACT(DAY FROM full_datetime) AS day_of_month,
         EXTRACT(HOUR FROM full_datetime) AS hour,
         EXTRACT(MINUTE FROM full_datetime) AS minute,
+        date_format(full_datetime, 'HH:mm') AS hour_minute,
         full_datetime
     FROM times
     ORDER BY full_datetime

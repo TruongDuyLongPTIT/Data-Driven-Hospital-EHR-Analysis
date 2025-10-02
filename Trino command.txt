@@ -55,12 +55,14 @@ SELECT * FROM fact_icu_vital_sign_event WHERE subject_id = 16723035;
 
 
 -- Lấy BP data với 3 đường: systolic, diastolic, mean
-SELECT 
+trino --execute
+"SELECT 
     dp.subject_id,
     dp.age,
     dp.gender,
     dt.full_datetime,                  
     dt.day_of_month,
+	dt.hour_minute,
     dt.hour,
     dt.minute,
 	di.stay_id,
@@ -70,14 +72,15 @@ SELECT
         WHEN f.itemid = 220052 THEN 'mean'
     END as bp_type,
     f.value_of_measurements as bp_value,
-    f.unit_of_measurements as unit
+    f.unit_of_measurements as unit,
+	f.time_group
 FROM fact_icu_vital_sign_event f
 JOIN dim_patient dp ON f.subject_id = dp.subject_id
 JOIN dim_icu_stay di ON f.stay_id = di.stay_id
 JOIN dim_event_type de ON f.itemid = de.itemid
 JOIN dim_time dt ON f.timekey = dt.timekey
-WHERE f.itemid IN (220050, 220051, 220052)
-ORDER BY dt.full_datetime, f.itemid;
+WHERE dp.subject_id = 10045991 AND di.stay_id = 34889777 and de.itemid in (220050, 220051, 220052)
+ORDER BY dt.full_datetime, f.itemid" --output-format CSV > /tmp/blood_pressure.csv;
 
 ------------ Connect Trino with Tableau---------
 jdbc:trino://localhost:8084/iceberg/mimic_trino

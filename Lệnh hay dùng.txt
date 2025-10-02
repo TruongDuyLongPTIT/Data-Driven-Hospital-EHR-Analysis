@@ -24,11 +24,13 @@ docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\scripts\Load\dimEventTy
 docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\scripts\Load\dimPatients.py" spark-master:/opt/bitnami/spark/code
 docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\scripts\Load\dimICUStay.py" spark-master:/opt/bitnami/spark/code
 docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\scripts\Load\factICUVitalSignEvent.py" spark-master:/opt/bitnami/spark/code
+docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\scripts\Load\debug_fact.py" spark-master:/opt/bitnami/spark/code
+
 
 
 docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\spark-jars\aws-java-sdk-bundle-1.12.262.jar" spark-master:/opt/bitnami/spark/jars
 docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\spark-jars\hadoop-aws-3.3.4.jar" spark-master:/opt/bitnami/spark/jars
-docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\spark-jars\iceberg-spark-runtime-3.5_2.12-1.4.3.jar" spark-master:/opt/bitnami/spark/jars
+docker cp "C:\DataUser\Data-Driven-Hospital-EHR-Analysis\spark-jars\iceberg-spark-runtime-3.5_2.12-1.6.0.jar" spark-master:/opt/bitnami/spark/jars
 
 
 
@@ -60,7 +62,7 @@ com.amazonaws:aws-java-sdk-bundle:1.12.262 \
 
 /opt/bitnami/spark/bin/spark-submit \
   --master spark://spark-master:7077 \
-  --jars /opt/bitnami/spark/spark-jars/iceberg-spark-runtime-3.5_2.12-1.4.3.jar,/opt/bitnami/spark/ivy/hadoop-aws-3.3.4.jar,/opt/bitnami/spark/ivy/aws-java-sdk-bundle-1.12.262.jar \
+  --jars /opt/bitnami/spark/spark-jars/iceberg-spark-runtime-3.5_2.12-1.6.0.jar,/opt/bitnami/spark/ivy/hadoop-aws-3.3.4.jar,/opt/bitnami/spark/ivy/aws-java-sdk-bundle-1.12.262.jar \
   --packages org.postgresql:postgresql:42.7.3 \
   --conf spark.jars.ivy=/tmp/.ivy2 \
   --conf spark.sql.extensions=org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions \
@@ -81,7 +83,7 @@ com.amazonaws:aws-java-sdk-bundle:1.12.262 \
   --conf spark.executor.cores=1 \
   --conf spark.executor.instances=3 \
   --master spark://spark-master:7077 \
-  --jars /opt/bitnami/spark/jars/iceberg-spark-runtime-3.5_2.12-1.4.3.jar \
+  --jars /opt/bitnami/spark/jars/iceberg-spark-runtime-3.5_2.12-1.6.0.jar \
   --packages org.postgresql:postgresql:42.7.3 \
   --py-files /opt/bitnami/spark/code/config.py \
   /opt/bitnami/spark/code/ingest_mimic.py
@@ -93,9 +95,9 @@ com.amazonaws:aws-java-sdk-bundle:1.12.262 \
   --conf spark.executor.cores=1 \
   --conf spark.executor.instances=3 \
   --master spark://spark-master:7077 \
-  --jars /opt/bitnami/spark/jars/iceberg-spark-runtime-3.5_2.12-1.4.3.jar \
+  --jars /opt/bitnami/spark/jars/iceberg-spark-runtime-3.5_2.12-1.6.0.jar \
   --packages org.postgresql:postgresql:42.7.3 \
-  /opt/bitnami/spark/code/dimTime.py
+  /opt/bitnami/spark/code/factICUVitalSignEvent.py
   
   dimTime
   dimEventType
@@ -111,7 +113,7 @@ chartevents - 3 core - 300 partition - 1200s
 
 Xem thành phần chiếm dung lượng trong docker: docker system df -v
 
-git rm --cached spark-jars/aws-java-sdk-bundle-1.12.262.jar spark-jars/hadoop-aws-3.3.4.jar spark-jars/iceberg-spark-runtime-3.5_2.12-1.4.3.jar
+git rm --cached spark-jars/aws-java-sdk-bundle-1.12.262.jar spark-jars/hadoop-aws-3.3.4.jar spark-jars/iceberg-spark-runtime-3.5_2.12-1.6.0.jar
 
 
 Lệnh git:

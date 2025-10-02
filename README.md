@@ -2,4 +2,4 @@
 
 ![fnal27 drawio](https://github.com/user-attachments/assets/d8dc0064-f5e8-4401-96eb-865ef02846db)
 
-[medical_dashboard.tsx](https://github.com/user-attachments/files/22620284/medical_dashboard.tsx)
+![Dashboard](Dashboardgif-ezgif.com-optimize.gif)
