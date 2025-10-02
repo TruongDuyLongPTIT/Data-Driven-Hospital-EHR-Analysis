@@ -2,11 +2,42 @@
 - I built a data pipeline project using the **MIMIC dataset** with a **lakehouse architecture**.
 - The goal of this project is to **practice and strengthen my data engineering skill**s.
 - It demonstrates my ability to design and implement modern data workflows for **real-world healthcare data**.
+  
+## ⚕️ Bộ dữ liệu: MIMIC-IV Dataset
 
-## 🛰️ System Architecture
+**MIMIC-IV (Medical Information Mart for Intensive Care IV)** là bộ dữ liệu y tế thực tế quy mô lớn, được công bố bởi MIT Lab for Computational Physiology, chứa dữ liệu ẩn danh của hàng chục nghìn bệnh nhân tại Beth Israel Deaconess Medical Center (Boston, MA).
+
+### Đặc Điểm Nổi Bật
+
+| Đặc Điểm | Mô Tả |
+|----------|-------|
+| **Dữ Liệu Thực Tế** | Dữ liệu lâm sàng **thực tế** từ bệnh viện, không phải dữ liệu tổng hợp hay mô phỏng |
+| **Quy Mô** | **~100GB** khi lưu trong RDBMS, hàng trăm triệu bản ghi |
+| **Số Bệnh Nhân** | Hàng chục nghìn bệnh nhân ICU và nội trú |
+| **Bảo Mật** | Dữ liệu đã được khử định danh hoàn toàn (HIPAA compliant) |
+| **Phiên Bản** | MIMIC-IV v3.1 (latest) |
+
+### Nội Dung Dataset
+
+**Bộ dữ liệu bao gồm:**
+- **Thông tin nhân khẩu học**: Tuổi, giới tính, dân tộc
+- **Chẩn đoán lâm sàng**: ICD-9, ICD-10 codes
+- **Kê đơn thuốc**: Loại thuốc, liều lượng, thời gian
+- **Xét nghiệm**: Kết quả lab tests, đo lường sinh hiệu
+- **Thủ thuật y tế**: Procedures, surgeries
+- **Ghi chú lâm sàng**: Clinical notes (text data)
+- **Dữ liệu ICU**: Vital signs, ventilator settings, điều trị hồi sức
+- **Billing & Insurance**: Chi phí điều trị, mã bảo hiểm
+- Xem phân tích chi tiết bộ dữ liệu tại đây: [Documentation](https://colab.research.google.com/drive/14MG0qrJvCDtgT5EgvIRKHGU17OW_T3l0?pli=1#scrollTo=TV9QtO_zOmZf)
+
+### Nguồn và tài liệu liên quan:**
+- Official site: https://physionet.org/content/mimiciv/
+- Academic Journal: [Nature Paper](https://www-nature-com.translate.goog/articles/s41597-022-01899-x?error=cookies_not_supported&code=24abe187-8088-40fc-9ade-eae7426b86a1&_x_tr_sl=en&_x_tr_tl=vi&_x_tr_hl=vi&_x_tr_pto=tc)
+
+## 🩹 System Architecture
 ![finalllllllll](https://github.com/user-attachments/assets/58fe9ecb-798a-41b5-b84d-a4990f58ce3c)
 
-## Infrastructure
+## 🌡️ Infrastructure
 
 | Thành Phần | Phiên Bản | Container | Ports | Chức Năng Chính |
 |------------|-----------|-----------|-------|-----------------|
@@ -23,7 +54,7 @@
 | **Apache Airflow** | 2.8.1 | `airflow_standalone` | 8090 | Workflow orchestration |
 | **DBT** | 1.7.8 | `dbt_service` | - | Data transformation framework |
 
-## Tech Stack
+## 🪢 Tech Stack
 | Component | Purpose | Technology |
 |-----------|---------|------------|
 | **ETL Pipeline** | Data extraction, transformation, loading | Apache Spark, Python |
@@ -33,7 +64,7 @@
 | **Database Source** | Ingest\Extract data source to Lakehouse | PostgreSQL |
 | **Visualization** | Business intelligence dashboards | Tableau |
 
-## 🗃️ Repository Structure
+## 💉 Repository Structure
 <details>
 <summary>📋 View Full Directory Tree</summary>
 
