@@ -6,7 +6,37 @@
 ## 🛰️ System Architecture
 ![finalllllllll](https://github.com/user-attachments/assets/58fe9ecb-798a-41b5-b84d-a4990f58ce3c)
 
+## Infrastructure
+
+| Thành Phần | Phiên Bản | Container | Ports | Chức Năng Chính |
+|------------|-----------|-----------|-------|-----------------|
+| **Apache Spark Master** | 3.5.0 | `spark-master` | 8080 (UI), 7077 (Master) | Điều phối cluster, quản lý workers |
+| **Spark Worker 1** | 3.5.0 | `spark-worker-1` | 8081 | Xử lý dữ liệu phân tán |
+| **Spark Worker 2** | 3.5.0 | `spark-worker-2` | 8082 | Xử lý dữ liệu phân tán |
+| **Spark Worker 3** | 3.5.0 | `spark-worker-3` | 8083 | Xử lý dữ liệu phân tán |
+| **MinIO Node 1** | Latest | `minio1` | 9000 (API), 9001 (Console) | Object storage (S3-compatible) |
+| **MinIO Node 2** | Latest | `minio2` | - | Distributed storage node |
+| **MinIO Node 3** | Latest | `minio3` | - | Distributed storage node |
+| **PostgreSQL** | 15.6 | `postgres_db` | 5432 | Relational database, metadata store |
+| **Iceberg REST Catalog** | 0.10.0 | `iceberg-rest` | 8181 | Table format, schema management |
+| **Trino** | 435 | `trino` | 8084 | Distributed SQL query engine |
+| **Apache Airflow** | 2.8.1 | `airflow_standalone` | 8090 | Workflow orchestration |
+| **DBT** | 1.7.8 | `dbt_service` | - | Data transformation framework |
+
+## Tech Stack
+| Component | Purpose | Technology |
+|-----------|---------|------------|
+| **ETL Pipeline** | Data extraction, transformation, loading | Apache Spark, Python |
+| **Workflow Orchestration** | Schedule & monitor data pipelines | Apache Airflow, dbt |
+| **Query Engine** | High-performance SQL analytics | Trino |
+| **Lakehouse** | Scalable object storage | MinIO + Apache Iceberg |
+| **Database Source** | Ingest\Extract data source to Lakehouse | PostgreSQL |
+| **Visualization** | Business intelligence dashboards | Tableau |
+
 ## 🗃️ Repository Structure
+<details>
+<summary>📋 View Full Directory Tree</summary>
+
 ```shell
 Healthcare-Data-Driven-Hospital-EHR-Analysis/
 │
@@ -86,3 +116,6 @@ Healthcare-Data-Driven-Hospital-EHR-Analysis/
 ├── stop.bat
 └── README.md
 ```
+<\details>
+
+##
