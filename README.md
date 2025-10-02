@@ -67,7 +67,7 @@
 ## 💉 Repository Structure
 <details>
 <summary>📋 View Full Directory Tree</summary>
-
+  
 ```shell
 Healthcare-Data-Driven-Hospital-EHR-Analysis/
 │
@@ -147,6 +147,11 @@ Healthcare-Data-Driven-Hospital-EHR-Analysis/
 ├── stop.bat
 └── README.md
 ```
-<\details>
 
-##
+</details>
+
+## 🚀 Getting Started
+1. **Download Dataset**.
+    + Bạn có thể download bộ dữ liệu [tại đây](https://physionet.org/content/mimiciv/).
+2. **Clone my repository**
+<pre>git clone https://github.com/TruongDuyLongPTIT/Healthcare-Data-Driven-Hospital-EHR-Analysis.git</pre>
