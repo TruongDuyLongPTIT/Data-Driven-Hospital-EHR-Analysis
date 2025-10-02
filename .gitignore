@@ -1,3 +1,6 @@
+# Ingest 
+import_csv_to_postgres.py
+
 # Java/Scala binaries
 *.jar
 
