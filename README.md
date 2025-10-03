@@ -171,3 +171,12 @@ Healthcare-Data-Driven-Hospital-EHR-Analysis/
     Now, I running scripts manually.
     But, I will use Airflow to schedule running time (Comming soon...)</pre>
 ## 🩺 Guide for you
+1. Extract data (Database Source -> Raw Bucket)
+  <pre>scripts/Extract/ingest_mimic.py</pre>
+  - Database Source:
+  <img width="1912" height="1025" alt="image" src="https://github.com/user-attachments/assets/dacfb73b-da49-4c58-b2db-17a7a0dd7164" />
+  - Raw Bucket (MinIO):
+  <img width="1913" height="947" alt="image" src="https://github.com/user-attachments/assets/e3983934-8cd7-482a-adc9-05a996e2d488" />
+
+3. Tranform data (Raw Bucket -> Silver Bucket)
+4. Load data (Silver Bucket -> Gold Bucket)
