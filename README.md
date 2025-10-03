@@ -174,6 +174,9 @@ Healthcare-Data-Driven-Hospital-EHR-Analysis/
 
 https://github.com/user-attachments/assets/3b1d384d-28a2-4467-b2a6-8759d8538530
 
+https://github.com/user-attachments/assets/1cfc72e9-1dae-41d0-856b-f1e1036813f6
+
+
 **1. Extract data (Database Source -> Bronze Bucket) and Using Apache Iceberg to manage Parquet files as database-like tables.**
 <pre>
     scripts/Extract/config.py
