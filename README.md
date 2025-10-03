@@ -20,14 +20,14 @@
 #### Nội Dung Dataset
 
 **Bộ dữ liệu bao gồm:**
-- **Thông tin nhân khẩu học**: Tuổi, giới tính, dân tộc
-- **Chẩn đoán lâm sàng**: ICD-9, ICD-10 codes
-- **Kê đơn thuốc**: Loại thuốc, liều lượng, thời gian
-- **Xét nghiệm**: Kết quả lab tests, đo lường sinh hiệu
-- **Thủ thuật y tế**: Procedures, surgeries
-- **Ghi chú lâm sàng**: Clinical notes (text data)
-- **Dữ liệu ICU**: Vital signs, ventilator settings, điều trị hồi sức
-- **Billing & Insurance**: Chi phí điều trị, mã bảo hiểm
+- **🤒 Thông tin nhân khẩu học của bệnh nhân**: Tuổi, giới tính, dân tộc
+- **🩺 Chẩn đoán lâm sàng**: ICD-9, ICD-10 codes
+- **💊 Kê đơn thuốc**: Loại thuốc, liều lượng, thời gian
+- **🔬 Xét nghiệm**: Kết quả lab tests, đo lường sinh hiệu
+- **🧪 Thủ thuật y tế**: Procedures, surgeries
+- **🏥 Ghi chú lâm sàng**: Clinical notes (text data)
+- **🚨 Dữ liệu ICU**: Vital signs, ventilator settings, điều trị hồi sức
+- **Billing & Insurance**: Thông tin dịch vụ tính phí điều trị, mã bảo hiểm
 - Xem phân tích chi tiết bộ dữ liệu tại đây: [Documentation](https://colab.research.google.com/drive/14MG0qrJvCDtgT5EgvIRKHGU17OW_T3l0?usp=sharing)
 
 #### Nguồn và tài liệu liên quan:**
