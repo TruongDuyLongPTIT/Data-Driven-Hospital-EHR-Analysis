@@ -27,7 +27,7 @@
 - **🧪 Thủ thuật y tế**: Procedures, surgeries
 - **🏥 Ghi chú lâm sàng**: Clinical notes (text data)
 - **🚨 Dữ liệu ICU**: Vital signs, ventilator settings, điều trị hồi sức
-- **Billing & Insurance**: Thông tin dịch vụ tính phí điều trị, mã bảo hiểm
+- **🦠 Billing & Insurance**: Thông tin dịch vụ tính phí điều trị, mã bảo hiểm
 - Xem phân tích chi tiết bộ dữ liệu tại đây: [Documentation](https://colab.research.google.com/drive/14MG0qrJvCDtgT5EgvIRKHGU17OW_T3l0?usp=sharing)
 
 #### Nguồn và tài liệu liên quan:**
