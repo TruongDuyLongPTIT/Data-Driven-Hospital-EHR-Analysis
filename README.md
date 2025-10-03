@@ -171,8 +171,13 @@ Healthcare-Data-Driven-Hospital-EHR-Analysis/
     Now, I running scripts manually.
     But, I will use Airflow to schedule running time (Comming soon...)</pre>
 ## 🩺 Guide for you
-**1. Extract data (Database Source -> Bronze Bucket)**
-  <pre>scripts/Extract/ingest_mimic.py</pre>
+**1. Extract data (Database Source -> Bronze Bucket) and Using Apache Iceberg to manage Parquet files as database-like tables.**
+  <pre>scripts/Extract/config.py
+    scripts/Extract/ingest_mimic.py</pre>
+
+
+https://github.com/user-attachments/assets/85aec4f8-157c-4f4e-8b64-b488b7a08fc7
+
 
 **2. Tranform data (Bronze Bucket -> Silver Bucket)**
 **3. Load data (Silver Bucket -> Gold Bucket)**
