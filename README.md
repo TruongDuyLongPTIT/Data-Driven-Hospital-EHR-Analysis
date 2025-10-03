@@ -177,9 +177,9 @@ Healthcare-Data-Driven-Hospital-EHR-Analysis/
 <summary><b>🎥 Click để xem video</b></summary>
 <br>
   
-https://github.com/user-attachments/assets/366f027e-2625-4a54-95c6-4633b90ca630
+https://github.com/user-attachments/assets/1fd65fa1-9d60-4751-9cd0-e76834551e57
 
-Uploading Distributed and Parallel Processing by Spark Cluster and Trino query.mp4…
+https://github.com/user-attachments/assets/7a022613-043b-4254-921c-b646e0f88f99
 
 </video>
 </details>
