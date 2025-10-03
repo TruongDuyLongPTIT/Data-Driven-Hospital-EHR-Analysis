@@ -54,7 +54,7 @@
 | **Apache Airflow** | 2.8.1 | `airflow_standalone` | 8090 | Workflow orchestration |
 | **DBT** | 1.7.8 | `dbt_service` | - | Data transformation framework |
 
-## 🪢 Tech Stack
+## 🧬 Tech Stack
 | Component | Purpose | Technology |
 |-----------|---------|------------|
 | **ETL Pipeline** | Data extraction, transformation, loading | Apache Spark, Python |
