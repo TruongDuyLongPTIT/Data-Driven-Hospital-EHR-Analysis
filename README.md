@@ -172,7 +172,16 @@ Healthcare-Data-Driven-Hospital-EHR-Analysis/
     But, I will use Airflow to schedule running time (Comming soon...)</pre>
 ## 🩺 Guide for you
 
-https://github.com/user-attachments/assets/3b1d384d-28a2-4467-b2a6-8759d8538530
+
+<details>
+<summary><b>🎥 Click để xem video</b></summary>
+<br>
+https://github.com/user-attachments/assets/366f027e-2625-4a54-95c6-4633b90ca630
+
+https://github.com/user-attachments/assets/a6b052e1-b791-4256-921c-868911479c07
+</video>
+</details>
+
 
 **1. Extract data (Database Source -> Bronze Bucket) and Using Apache Iceberg to manage Parquet files as database-like tables.**
 <pre>
