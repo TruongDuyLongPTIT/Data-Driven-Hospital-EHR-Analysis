@@ -179,7 +179,7 @@ Healthcare-Data-Driven-Hospital-EHR-Analysis/
   
 https://github.com/user-attachments/assets/366f027e-2625-4a54-95c6-4633b90ca630
 
-https://github.com/user-attachments/assets/a6b052e1-b791-4256-921c-868911479c07
+Uploading Distributed and Parallel Processing by Spark Cluster and Trino query.mp4…
 
 </video>
 </details>
