@@ -212,4 +212,4 @@ https://github.com/user-attachments/assets/7a022613-043b-4254-921c-b646e0f88f99
 
 ~ Tôi dùng Trino làm trung gian để query dữ liệu từ Data Model rồi đưa vào Tableau để làm Dashboard.
 
-![finaldb](https://github.com/user-attachments/assets/f7ee0d9f-72e5-436b-9146-87593d7c8559)
+![Dashboard](https://github.com/user-attachments/assets/b9e05996-4204-427d-b8ff-37f259dbea41)
