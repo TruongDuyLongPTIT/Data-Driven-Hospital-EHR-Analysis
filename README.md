@@ -192,7 +192,7 @@ Healthcare-Data-Driven-Hospital-EHR-Analysis/
     scripts/Load/dimTime.py
     scripts/Load/factICUVitalSignEvent
 </pre>
-! Bây giờ, star schema mới chỉ có 1 số bảng cơ bản. Tôi sẽ mở rộng thêm nữa
+! Bây giờ, star schema mới chỉ có 1 số bảng cơ bản. Tôi sẽ mở rộng thêm nữa để khai thác tối đa giá trị của bộ dữ liệu.
 
 **4. Query for Analytics**
 
