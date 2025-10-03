@@ -3,7 +3,7 @@
 - The goal of this project is to **practice and strengthen my data engineering skill**s.
 - It demonstrates my ability to design and implement modern data workflows for **real-world healthcare data**.
   
-## ⚕️ Bộ dữ liệu: MIMIC-IV Dataset
+## 🧬 Bộ dữ liệu: MIMIC-IV Dataset
 
 **MIMIC-IV (Medical Information Mart for Intensive Care IV)** là bộ dữ liệu y tế thực tế quy mô lớn, được công bố bởi MIT Lab for Computational Physiology, chứa dữ liệu ẩn danh của hàng chục nghìn bệnh nhân tại Beth Israel Deaconess Medical Center (Boston, MA).
 
