@@ -30,10 +30,10 @@ MIMIC_TABLES = [
     # "emar",
     # "emar_detail",
     # "hcpcsevents",
-    "icustays"
+    # "icustays",
     # "ingredientevents",
     # "inputevents",
-    # "labevents",
+    "labevents"
     # "microbiologyevents",
     # "omr",
     # "outputevents",
