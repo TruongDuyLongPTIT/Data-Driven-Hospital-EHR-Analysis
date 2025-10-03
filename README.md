@@ -170,7 +170,8 @@ Healthcare-Data-Driven-Hospital-EHR-Analysis/
   <pre>
     Now, I running scripts manually.
     But, I will use Airflow to schedule running time (Comming soon...)</pre>
-## 🩺 Guide for you
+    
+## 🩺 Guide project
 
 
 <details>
