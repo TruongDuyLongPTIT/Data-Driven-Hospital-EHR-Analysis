@@ -195,4 +195,5 @@ Healthcare-Data-Driven-Hospital-EHR-Analysis/
 ! Bây giờ, star schema mới chỉ có 1 số bảng cơ bản. Tôi sẽ mở rộng thêm nữa
 
 **4. Query for Analytics**
-  - Tôi dùng Trino làm trung gian để query dữ liệu từ Data Model rồi đưa vào Tableau để làm báo cáo
+
+~ Tôi dùng Trino làm trung gian để query dữ liệu từ Data Model rồi đưa vào Tableau để làm Dashboard.
