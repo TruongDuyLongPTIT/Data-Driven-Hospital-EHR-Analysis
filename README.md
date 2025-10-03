@@ -172,12 +172,27 @@ Healthcare-Data-Driven-Hospital-EHR-Analysis/
     But, I will use Airflow to schedule running time (Comming soon...)</pre>
 ## 🩺 Guide for you
 **1. Extract data (Database Source -> Bronze Bucket) and Using Apache Iceberg to manage Parquet files as database-like tables.**
-  <pre>scripts/Extract/config.py
+<pre>
+    scripts/Extract/config.py
     scripts/Extract/ingest_mimic.py</pre>
 
-
-https://github.com/user-attachments/assets/85aec4f8-157c-4f4e-8b64-b488b7a08fc7
-
-
 **2. Tranform data (Bronze Bucket -> Silver Bucket)**
+<pre>
+    scripts/Transform/chartevents_transform.py
+    scripts/Transform/d_items_transform.py
+    scripts/Transform/icustays_transform.py
+    scripts/Transform/patients_transform.py
+    scripts/Transform/time_normalization.py</pre>
+    
 **3. Load data (Silver Bucket -> Gold Bucket)**
+<pre>
+    scripts/Load/dimEventType.py
+    scripts/Load/dimICUStay.py
+    scripts/Load/dimPatients.py
+    scripts/Load/dimTime.py
+    scripts/Load/factICUVitalSignEvent
+</pre>
+! Bây giờ, star schema mới chỉ có 1 số bảng cơ bản. Tôi sẽ mở rộng thêm nữa
+
+**4. Query for Analytics**
+  - Tôi dùng Trino làm trung gian để query dữ liệu từ Data Model rồi đưa vào Tableau để làm báo cáo
