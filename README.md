@@ -41,7 +41,7 @@
 
 | Thành Phần | Phiên Bản | Container | Ports | Chức Năng Chính |
 |------------|-----------|-----------|-------|-----------------|
-| **Apache Spark Master** | 3.5.0 | `spark-master` | 8080 (UI), 7077 (Master) | Điều phối cluster, quản lý workers |
+| **Spark Master** | 3.5.0 | `spark-master` | 8080 (UI), 7077 (Master) | Điều phối cluster, quản lý workers |
 | **Spark Worker 1** | 3.5.0 | `spark-worker-1` | 8081 | Xử lý dữ liệu phân tán |
 | **Spark Worker 2** | 3.5.0 | `spark-worker-2` | 8082 | Xử lý dữ liệu phân tán |
 | **Spark Worker 3** | 3.5.0 | `spark-worker-3` | 8083 | Xử lý dữ liệu phân tán |
@@ -171,6 +171,9 @@ Healthcare-Data-Driven-Hospital-EHR-Analysis/
     Now, I running scripts manually.
     But, I will use Airflow to schedule running time (Comming soon...)</pre>
 ## 🩺 Guide for you
+
+https://github.com/user-attachments/assets/3b1d384d-28a2-4467-b2a6-8759d8538530
+
 **1. Extract data (Database Source -> Bronze Bucket) and Using Apache Iceberg to manage Parquet files as database-like tables.**
 <pre>
     scripts/Extract/config.py
