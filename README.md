@@ -7,7 +7,7 @@
 
 **MIMIC-IV (Medical Information Mart for Intensive Care IV)** là bộ dữ liệu y tế thực tế quy mô lớn, được công bố bởi MIT Lab for Computational Physiology, chứa dữ liệu ẩn danh của hàng chục nghìn bệnh nhân tại Beth Israel Deaconess Medical Center (Boston, MA).
 
-### Đặc Điểm Nổi Bật
+#### Đặc Điểm Nổi Bật
 
 | Đặc Điểm | Mô Tả |
 |----------|-------|
@@ -17,7 +17,7 @@
 | **Bảo Mật** | Dữ liệu đã được khử định danh hoàn toàn (HIPAA compliant) |
 | **Phiên Bản** | MIMIC-IV v3.1 (latest) |
 
-### Nội Dung Dataset
+#### Nội Dung Dataset
 
 **Bộ dữ liệu bao gồm:**
 - **Thông tin nhân khẩu học**: Tuổi, giới tính, dân tộc
@@ -30,7 +30,7 @@
 - **Billing & Insurance**: Chi phí điều trị, mã bảo hiểm
 - Xem phân tích chi tiết bộ dữ liệu tại đây: [Documentation](https://colab.research.google.com/drive/14MG0qrJvCDtgT5EgvIRKHGU17OW_T3l0?usp=sharing)
 
-### Nguồn và tài liệu liên quan:**
+#### Nguồn và tài liệu liên quan:**
 - Official site: https://physionet.org/content/mimiciv/
 - Academic Journal: [Nature Paper](https://www-nature-com.translate.goog/articles/s41597-022-01899-x?error=cookies_not_supported&code=24abe187-8088-40fc-9ade-eae7426b86a1&_x_tr_sl=en&_x_tr_tl=vi&_x_tr_hl=vi&_x_tr_pto=tc)
 
