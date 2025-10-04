@@ -72,8 +72,7 @@ trino --execute
         WHEN f.itemid = 220052 THEN 'mean'
     END as bp_type,
     f.value_of_measurements as bp_value,
-    f.unit_of_measurements as unit,
-	f.time_group
+    f.unit_of_measurements as unit
 FROM fact_icu_vital_sign_event f
 JOIN dim_patient dp ON f.subject_id = dp.subject_id
 JOIN dim_icu_stay di ON f.stay_id = di.stay_id
