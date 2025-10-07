@@ -6,7 +6,7 @@ services:
     image: bitnami/spark:3.5.0
     container_name: spark-master
     hostname: spark-master
-    user: "0"  # Run as root to avoid permission issues
+    user: "0"
     environment:
       - SPARK_MODE=master
       - SPARK_RPC_AUTHENTICATION_ENABLED=no
@@ -17,8 +17,8 @@ services:
       - SPARK_USER=spark
       - JAVA_OPTS=-Djava.security.auth.login.config=/dev/null
     ports:
-      - "8080:8080"   # Spark Web UI
-      - "7077:7077"   # Spark Master Port
+      - "8080:8080"
+      - "7077:7077"
     networks:
       - spark-net
     volumes:
@@ -139,7 +139,12 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
       PGDATA: /var/lib/postgresql/data/pgdata
-    command: ["postgres", "-c", "max_connections=10000"]
+    command: 
+      - "postgres"
+      - "-c"
+      - "max_connections=10000"
+      - "-c"
+      - "wal_level=logical"  # Required for Debezium CDC
     ports:
       - "5432:5432"
     volumes:
@@ -148,6 +153,145 @@ services:
       - "C:/DataUser/MIMIC Dataset/mimic-iv-3.1/hosp:/csv"
     networks:
       - spark-net
+
+  # ------------------ Zookeeper (Required for Kafka) ------------------
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.5.3
+    container_name: zookeeper
+    hostname: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    networks:
+      - spark-net
+    volumes:
+      - zookeeper-data:/var/lib/zookeeper/data
+      - zookeeper-logs:/var/lib/zookeeper/log
+    restart: unless-stopped
+
+  # ------------------ Kafka ------------------
+  kafka:
+    image: confluentinc/cp-kafka:7.5.3
+    container_name: kafka
+    hostname: kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+      - "9093:9093"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    networks:
+      - spark-net
+    volumes:
+      - kafka-data:/var/lib/kafka/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9092"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # ------------------ Kafka UI (Optional but recommended) ------------------
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-ui
+    depends_on:
+      - kafka
+    ports:
+      - "8085:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
+    networks:
+      - spark-net
+    restart: unless-stopped
+
+  # ------------------ Debezium Connect ------------------
+  debezium:
+    image: debezium/connect:2.5
+    container_name: debezium
+    hostname: debezium
+    depends_on:
+      - kafka
+      - postgres
+    ports:
+      - "8087:8083"
+    environment:
+      BOOTSTRAP_SERVERS: kafka:9092
+      GROUP_ID: 1
+      CONFIG_STORAGE_TOPIC: debezium_configs
+      OFFSET_STORAGE_TOPIC: debezium_offsets
+      STATUS_STORAGE_TOPIC: debezium_statuses
+      # Increase replication factor for production
+      CONFIG_STORAGE_REPLICATION_FACTOR: 1
+      OFFSET_STORAGE_REPLICATION_FACTOR: 1
+      STATUS_STORAGE_REPLICATION_FACTOR: 1
+    networks:
+      - spark-net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8083/"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # ------------------ Debezium UI ------------------
+  debezium-ui:
+    image: debezium/debezium-ui:2.5
+    container_name: debezium-ui
+    hostname: debezium-ui
+    depends_on:
+      - debezium
+    ports:
+      - "8088:8080"
+    environment:
+      KAFKA_CONNECT_URIS: http://debezium:8083
+    networks:
+      - spark-net
+    restart: unless-stopped
+
+  # ------------------ Apache Flink JobManager ------------------
+  flink-jobmanager:
+    image: flink:1.18.1-scala_2.12-java11
+    container_name: flink-jobmanager
+    hostname: flink-jobmanager
+    ports:
+      - "8086:8081"  # Flink Web UI
+    command: jobmanager
+    environment:
+      - JOB_MANAGER_RPC_ADDRESS=flink-jobmanager
+    networks:
+      - spark-net
+    volumes:
+      - ./flink/jobs:/opt/flink/usrlib
+    restart: unless-stopped
+
+  # ------------------ Apache Flink TaskManager ------------------
+  flink-taskmanager:
+    image: flink:1.18.1-scala_2.12-java11
+    container_name: flink-taskmanager
+    hostname: flink-taskmanager
+    depends_on:
+      - flink-jobmanager
+    command: taskmanager
+    environment:
+      - JOB_MANAGER_RPC_ADDRESS=flink-jobmanager
+    networks:
+      - spark-net
+    volumes:
+      - ./flink/jobs:/opt/flink/usrlib
+    restart: unless-stopped
 
   # ------------------ Airflow (Standalone) ------------------
   airflow:
@@ -182,7 +326,6 @@ services:
       - postgres
     entrypoint: ["/bin/bash", "-c", "sleep infinity"]
     restart: unless-stopped
-    
 
   # ------------------ Iceberg REST Catalog ------------------
   iceberg-rest:
@@ -204,14 +347,14 @@ services:
     depends_on:
       - minio1
     restart: unless-stopped
-    
+
   # ------------------ Trino ------------------
   trino:
     image: trinodb/trino:435
     container_name: trino
     hostname: trino
     ports:
-      - "8084:8080"  # Trino Web UI & API
+      - "8084:8080"
     environment:
       - AWS_REGION=us-east-1
       - AWS_ACCESS_KEY_ID=minio
@@ -231,13 +374,16 @@ services:
       timeout: 10s
       retries: 5
       start_period: 60s
-    
+
 volumes:
   minio1-data:
   minio2-data:
   minio3-data:
   postgres_data:
     driver: local
+  zookeeper-data:
+  zookeeper-logs:
+  kafka-data:
 
 networks:
   spark-net:
