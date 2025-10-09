@@ -221,5 +221,6 @@ https://github.com/user-attachments/assets/7a022613-043b-4254-921c-b646e0f88f99
 - [ ] Set up dbt for manage SQL query
 - [ ] Update transform logic 
 - [ ] Set up Airflow for orchestration pipeline
+- [ ] Logging and monitoring
 - [x] Build basic data pipeline
 
