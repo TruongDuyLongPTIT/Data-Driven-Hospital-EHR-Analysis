@@ -8,28 +8,28 @@
 
 **MIMIC-IV (Medical Information Mart for Intensive Care IV)** is a **large-scale real-world** medical dataset published by the MIT Lab for Computational Physiology. It contains anonymized data from tens of thousands of patients at Beth Israel Deaconess Medical Center (Boston).
 
-#### Đặc Điểm Nổi Bật
+#### Key Features
 
 | Đặc Điểm | Mô Tả |
 |----------|-------|
-| **Dữ Liệu Thực Tế** | Dữ liệu lâm sàng **thực tế** từ bệnh viện, không phải dữ liệu tổng hợp hay mô phỏng |
-| **Quy Mô** | **~100GB** khi lưu trong RDBMS, hàng trăm triệu bản ghi |
-| **Số Bệnh Nhân** | Hàng chục nghìn bệnh nhân ICU và nội trú |
-| **Bảo Mật** | Dữ liệu đã được khử định danh hoàn toàn (HIPAA compliant) |
-| **Phiên Bản** | MIMIC-IV v3.1 (latest) |
+| **Real-world Data** | Clinical data from a **real hospital**, not synthetic or simulated data |
+| **Scale** | **~100GB** when stored in an RDBMS, with hundreds of millions of records |
+| **Number of Patients** | **Tens of thousands** of ICU and inpatient cases |
+| **Security** | Fully de-identified data (HIPAA compliant) |
+| **Version** | MIMIC-IV v3.1 (latest) |
 
-#### Nội Dung Dataset
+#### Dataset Contents
 
-**Bộ dữ liệu bao gồm:**
-- **🤒 Thông tin nhân khẩu học của bệnh nhân**: Tuổi, giới tính, dân tộc
-- **🩺 Chẩn đoán lâm sàng**: ICD-9, ICD-10 codes
-- **💊 Kê đơn thuốc**: Loại thuốc, liều lượng, thời gian
-- **🔬 Xét nghiệm**: Kết quả lab tests, đo lường sinh hiệu
-- **🧪 Thủ thuật y tế**: Procedures, surgeries
-- **🧫 Ghi chú lâm sàng**: Clinical notes (text data)
-- **🩸 Dữ liệu ICU**: Vital signs, ventilator settings, điều trị hồi sức
-- **⚗️ Billing & Insurance**: Thông tin dịch vụ tính phí điều trị, mã bảo hiểm
-- Xem phân tích chi tiết bộ dữ liệu tại đây: [Documentation](https://colab.research.google.com/drive/14MG0qrJvCDtgT5EgvIRKHGU17OW_T3l0?usp=sharing)
+**The dataset includes::**
+- **🤒 Patient demographics**: age, gender, ethnicity
+- **🩺 Clinical diagnoses**: ICD-9, ICD-10 codes
+- **💊 Medication prescriptions**: drug type, dosage, timing
+- **🔬 Laboratory tests**: lab test results, vital measurements
+- **🧪 Medical procedures**: procedures, surgeries
+- **🧫 Clinical notes**: clinical notes (text data)
+- **🩸 ICU data**: vital signs, ventilator settings, intensive care treatments
+- **⚗️ Billing & Insurance**: treatment billing information, insurance codes
+- See detailed dataset analysis here: [Documentation](https://colab.research.google.com/drive/14MG0qrJvCDtgT5EgvIRKHGU17OW_T3l0?usp=sharing)
 
 #### Nguồn và tài liệu liên quan:
 - Official site: https://physionet.org/content/mimiciv/
