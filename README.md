@@ -4,13 +4,13 @@
 - The goal of this project is to **practice and strengthen my data engineering skill**s.
 - It demonstrates my ability to design and implement modern data workflows for **real-world healthcare data**.
   
-## 🧬 Bộ dữ liệu: MIMIC-IV Dataset
+## 🧬 Dataset: MIMIC-IV Dataset
 
 **MIMIC-IV (Medical Information Mart for Intensive Care IV)** is a **large-scale real-world** medical dataset published by the MIT Lab for Computational Physiology. It contains anonymized data from tens of thousands of patients at Beth Israel Deaconess Medical Center (Boston).
 
 #### Key Features
 
-| Đặc Điểm | Mô Tả |
+| Features | Description |
 |----------|-------|
 | **Real-world Data** | Clinical data from a **real hospital**, not synthetic or simulated data |
 | **Scale** | **~100GB** when stored in an RDBMS, with hundreds of millions of records |
@@ -40,12 +40,12 @@
 
 ## 🌡️ Infrastructure
 
-| Thành Phần | Phiên Bản | Container | Ports | Chức Năng Chính |
+| Component | Version | Container | Ports | Role |
 |------------|-----------|-----------|-------|-----------------|
-| **Spark Master** | 3.5.0 | `spark-master` | 8080 (UI), 7077 (Master) | Điều phối cluster, quản lý workers |
-| **Spark Worker 1** | 3.5.0 | `spark-worker-1` | 8081 | Xử lý dữ liệu phân tán |
-| **Spark Worker 2** | 3.5.0 | `spark-worker-2` | 8082 | Xử lý dữ liệu phân tán |
-| **Spark Worker 3** | 3.5.0 | `spark-worker-3` | 8083 | Xử lý dữ liệu phân tán |
+| **Spark Master** | 3.5.0 | `spark-master` | 8080 (UI), 7077 (Master) | Cluster coordination and worker management |
+| **Spark Worker 1** | 3.5.0 | `spark-worker-1` | 8081 | Distributed data processing |
+| **Spark Worker 2** | 3.5.0 | `spark-worker-2` | 8082 | Distributed data processing |
+| **Spark Worker 3** | 3.5.0 | `spark-worker-3` | 8083 | Distributed data processing |
 | **MinIO Node 1** | Latest | `minio1` | 9000 (API), 9001 (Console) | Object storage (S3-compatible) |
 | **MinIO Node 2** | Latest | `minio2` | - | Distributed storage node |
 | **MinIO Node 3** | Latest | `minio3` | - | Distributed storage node |
