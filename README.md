@@ -64,7 +64,8 @@
 ## 🧬 Tech Stack
 | Component | Purpose | Technology |
 |-----------|---------|------------|
-| **ETL Pipeline** | Data extraction, transformation, loading | Apache Spark, Python |
+| **Streaming Data** | Data streaming extraction | Apache Flink, Kafka, Debezium |
+| **ETL Pipeline** | Data transformation, loading | Apache Spark, Python |
 | **Workflow Orchestration** | Schedule & monitor data pipelines | Apache Airflow, dbt |
 | **Query Engine** | High-performance SQL analytics | Trino |
 | **Lakehouse** | Scalable object storage | MinIO + Apache Iceberg |
