@@ -1,4 +1,4 @@
-# 🩻 [Healthcare] Hospital EHR Data Pipeline🩻 
+f# 🩻 [Healthcare] Hospital EHR Data Pipeline🩻 
 *(The project is being upgraded and refined...)*
 - I built a data pipeline project using the **MIMIC dataset** with a **lakehouse architecture**.
 - The goal of this project is to **practice and strengthen my data engineering skill**s.
@@ -199,19 +199,6 @@ Healthcare-Data-Driven-Hospital-EHR-Analysis/
     
 ## 🩺 Guide project
 
-
-<details>
-<summary><b>🎥 Click để xem video</b></summary>
-<br>
-  
-https://github.com/user-attachments/assets/1fd65fa1-9d60-4751-9cd0-e76834551e57
-
-https://github.com/user-attachments/assets/7a022613-043b-4254-921c-b646e0f88f99
-
-</video>
-</details>
-
-
 **1. Extract data (Database Source -> Bronze Bucket) and Using Apache Iceberg to manage Parquet files as database-like tables.**
 <pre>
     scripts/Extract/config.py
@@ -239,6 +226,17 @@ https://github.com/user-attachments/assets/478877cc-fe15-4ede-90f2-0342fce44ab3
     scripts/Load/factICUVitalSignEvent
 </pre>
 ! Right now, the **star schema only includes a few basic tables**. I will expand it further to fully leverage the value of the dataset.
+
+<details>
+<summary><b>🎥 Click to watch videos</b></summary>
+<br>
+  
+https://github.com/user-attachments/assets/1fd65fa1-9d60-4751-9cd0-e76834551e57
+
+https://github.com/user-attachments/assets/7a022613-043b-4254-921c-b646e0f88f99
+
+</video>
+</details>
 
 **4. Query for Analytics**
 
