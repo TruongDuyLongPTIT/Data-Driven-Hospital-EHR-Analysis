@@ -250,6 +250,7 @@ https://github.com/user-attachments/assets/7a022613-043b-4254-921c-b646e0f88f99
 - [ ] Update transform logic 
 - [ ] Set up Airflow for orchestration pipeline
 - [ ] Logging and monitoring
+- [ ] Feature engineering and training model
 - [ ] Set up Great Expectation for Data Quality Verify
 - [x] Set up Debezium for CDC and Kafka for streaming processing.
 - [x] Build basic data pipeline
