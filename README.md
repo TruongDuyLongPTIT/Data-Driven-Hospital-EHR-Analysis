@@ -31,7 +31,7 @@
 - **⚗️ Billing & Insurance**: treatment billing information, insurance codes
 - See detailed dataset analysis here: [Documentation](https://colab.research.google.com/drive/14MG0qrJvCDtgT5EgvIRKHGU17OW_T3l0?usp=sharing)
 
-#### Nguồn và tài liệu liên quan:
+#### Sources and Related Materials:
 - Official site: https://physionet.org/content/mimiciv/
 - Academic Journal: [Nature Paper](https://www-nature-com.translate.goog/articles/s41597-022-01899-x?error=cookies_not_supported&code=24abe187-8088-40fc-9ade-eae7426b86a1&_x_tr_sl=en&_x_tr_tl=vi&_x_tr_hl=vi&_x_tr_pto=tc)
 
@@ -219,11 +219,11 @@ https://github.com/user-attachments/assets/478877cc-fe15-4ede-90f2-0342fce44ab3
     scripts/Load/dimTime.py
     scripts/Load/factICUVitalSignEvent
 </pre>
-! Bây giờ, star schema mới chỉ có 1 số bảng cơ bản. Tôi sẽ mở rộng thêm nữa để khai thác tối đa giá trị của bộ dữ liệu.
+! Right now, the **star schema only includes a few basic tables**. I will expand it further to fully leverage the value of the dataset.
 
 **4. Query for Analytics**
 
-~ Tôi dùng Trino làm trung gian để query dữ liệu từ Data Model rồi đưa vào Tableau để làm Dashboard.
+~ I use **Trino as an intermediary to query data from the Data Model**, then feed it into Tableau to create dashboards.
 
 ![Dashboard](https://github.com/user-attachments/assets/674b9079-7766-4736-aa0e-8871db032fd5)
 
