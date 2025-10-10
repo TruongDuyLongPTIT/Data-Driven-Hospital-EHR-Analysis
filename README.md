@@ -70,6 +70,7 @@
 | **Query Engine** | High-performance SQL analytics | Trino |
 | **Lakehouse** | Scalable object storage | MinIO + Apache Iceberg |
 | **Database Source** | Ingest\Extract data source to Lakehouse | PostgreSQL |
+| **Data Quality** | Verify data quality | Great Expectation |
 | **Visualization** | Business intelligence dashboards | Tableau |
 
 ## 💉 Repository Structure
