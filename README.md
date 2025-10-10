@@ -72,6 +72,7 @@
 | **Database Source** | Ingest\Extract data source to Lakehouse | PostgreSQL |
 | **Data Quality** | Verify data quality | Great Expectation |
 | **Visualization** | Business intelligence dashboards | Tableau |
+| **Other tool** | Support for develop process | Git, DBeaver, Docker, Visual Studio Code, Claude/Grok/ChatGpt |
 
 ## 💉 Repository Structure
 <details>
