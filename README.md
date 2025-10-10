@@ -1,4 +1,5 @@
-# 🩻 [Healthcare] Hospital EHR Data Pipeline (The project is being upgraded and refined...)🩻
+# 🩻 [Healthcare] Hospital EHR Data Pipeline🩻 
+*(The project is being upgraded and refined...)*
 - I built a data pipeline project using the **MIMIC dataset** with a **lakehouse architecture**.
 - The goal of this project is to **practice and strengthen my data engineering skill**s.
 - It demonstrates my ability to design and implement modern data workflows for **real-world healthcare data**.
