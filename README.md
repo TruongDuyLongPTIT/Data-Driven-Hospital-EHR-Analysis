@@ -166,16 +166,31 @@ Healthcare-Data-Driven-Hospital-EHR-Analysis/
 2. **Clone my repository**
   <pre>
     git clone https://github.com/TruongDuyLongPTIT/Healthcare-Data-Driven-Hospital-EHR-Analysis.git</pre>
-3. **Download JAR files for Spark**
+3. **Download JAR files for Apache Flink and Apache Spark**
+  -----------Jars for Apache Flink-------------
+  <pre>
+    aws-java-sdk-bundle-1.12.648.jar
+    bundle-2.20.18.jar
+    flink-connector-base-1.18.1.jar
+    flink-s3-fs-hadoop-1.18.1.jar
+    flink-sql-connector-kafka-3.1.0-1.18.jar
+    hadoop-aws-3.3.4.jar
+    hadoop-common-3.3.4.jar
+    hadoop-hdfs-3.3.4.jar
+    hadoop-hdfs-client-3.3.4.jar
+    iceberg-aws-1.5.0.jar
+    iceberg-flink-runtime-1.18-1.5.0.jar</pre>  
+    
+  -----------Jars for Apache Spark-------------
   <pre>
     aws-java-sdk-bundle-1.12.262.jar
     hadoop-aws-3.3.4.jar
     iceberg-spark-runtime-3.5_2.12-1.6.0.jar</pre>
-5. **Start and Stop**
+4. **Start and Stop**
   <pre>
     Double-click start.bat file to start all docker container
     Similar, double-click stop.bat to shut-down all docker containers.</pre>
-6. **Run pipeline**
+5. **Run pipeline**
   <pre>
     Now, I running scripts manually.
     But, I will use Airflow to schedule running time (Comming soon...)</pre>
