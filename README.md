@@ -50,6 +50,10 @@
 | **MinIO Node 2** | Latest | `minio2` | - | Distributed storage node |
 | **MinIO Node 3** | Latest | `minio3` | - | Distributed storage node |
 | **PostgreSQL** | 15.6 | `postgres_db` | 5432 | Relational database, metadata store |
+| **Zookeeper** | 7.5.3 | `zookeeper` | 2181 | Required for Kafka |
+| **Kafka** | 7.5.3 | `kafka` | 9092-9093 | Distributed event streaming platform |
+| **Debezium** | 2.5 | `debezium` | 8087 | Change Data Capture |
+| **Apache Flink** | 15.6 | `flink-jobmanager` | 8086 | Process streaming data |
 | **Iceberg REST Catalog** | 0.10.0 | `iceberg-rest` | 8181 | Table format, schema management |
 | **Trino** | 435 | `trino` | 8084 | Distributed SQL query engine |
 | **Apache Airflow** | 2.8.1 | `airflow_standalone` | 8090 | Workflow orchestration |
