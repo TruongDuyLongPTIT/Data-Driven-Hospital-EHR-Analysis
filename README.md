@@ -190,6 +190,11 @@ https://github.com/user-attachments/assets/7a022613-043b-4254-921c-b646e0f88f99
 <pre>
     scripts/Extract/config.py
     scripts/Extract/ingest_mimic.py</pre>
+**! Converting to streaming extract data (use Debezium, Kafka, Apache Flink)...**
+
+
+https://github.com/user-attachments/assets/478877cc-fe15-4ede-90f2-0342fce44ab3
+
 
 **2. Tranform data (Bronze Bucket -> Silver Bucket)**
 <pre>
