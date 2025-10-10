@@ -35,7 +35,7 @@
 - Academic Journal: [Nature Paper](https://www-nature-com.translate.goog/articles/s41597-022-01899-x?error=cookies_not_supported&code=24abe187-8088-40fc-9ade-eae7426b86a1&_x_tr_sl=en&_x_tr_tl=vi&_x_tr_hl=vi&_x_tr_pto=tc)
 
 ## 🩹 System Architecture
-![finalllllllll](https://github.com/user-attachments/assets/58fe9ecb-798a-41b5-b84d-a4990f58ce3c)
+![EHR final drawio](https://github.com/user-attachments/assets/f72fc993-9bac-4335-9c38-6cabdf86b6fa)
 
 ## 🌡️ Infrastructure
 
