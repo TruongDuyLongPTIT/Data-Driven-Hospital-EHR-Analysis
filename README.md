@@ -59,6 +59,8 @@
 | **Apache Airflow** | 2.8.1 | `airflow_standalone` | 8090 | Workflow orchestration |
 | **DBT** | 1.7.8 | `dbt_service` | - | Data transformation framework |
 
+<img width="1689" height="346" alt="image" src="https://github.com/user-attachments/assets/4bbc3eff-71c1-4752-ab67-9679f2aae759" />
+
 ## 🧬 Tech Stack
 | Component | Purpose | Technology |
 |-----------|---------|------------|
