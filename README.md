@@ -228,11 +228,12 @@ https://github.com/user-attachments/assets/478877cc-fe15-4ede-90f2-0342fce44ab3
 ![Dashboard](https://github.com/user-attachments/assets/674b9079-7766-4736-aa0e-8871db032fd5)
 
 ## 🔜 Check list
-- [ ] Set up Debezium for CDC and Kafka for streaming processing.
 - [ ] I just do full load at first running time, need update logic ETL data from the second time onwards
 - [ ] Set up dbt for manage SQL query
 - [ ] Update transform logic 
 - [ ] Set up Airflow for orchestration pipeline
 - [ ] Logging and monitoring
+- [ ] Set up Great Expectation for Data Quality Verify
+- [x] Set up Debezium for CDC and Kafka for streaming processing.
 - [x] Build basic data pipeline
 
