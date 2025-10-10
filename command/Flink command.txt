@@ -1,0 +1,98 @@
+docker exec -it flink-jobmanager bash
+./bin/sql-client.sh
+
+
+
+-- ========================================
+-- CDC từ Kafka vào Iceberg table đã có sẵn
+-- ========================================
+
+-- 1. Tạo Kafka source table với Debezium format
+DROP TABLE IF EXISTS default_catalog.default_database.kafka_d_items;
+
+CREATE TABLE default_catalog.default_database.kafka_d_items (
+  payload ROW
+    after ROW
+      itemid INT,
+      label STRING,
+      abbreviation STRING,
+      linksto STRING,
+      category STRING,
+      unitname STRING,
+      param_type STRING,
+      lownormalvalue DOUBLE,
+      highnormalvalue DOUBLE
+    >,
+    op STRING
+  >
+) WITH (
+  'connector' = 'kafka',
+  'topic' = 'postgres.public.d_items',
+  'properties.bootstrap.servers' = 'kafka:9092',
+  'properties.group.id' = 'flink-insert-simple-v6',
+  'format' = 'json',
+  'json.ignore-parse-errors' = 'true',
+  'json.fail-on-missing-field' = 'false',
+  'scan.startup.mode' = 'earliest-offset'
+);
+
+-- 2. Tạo Iceberg catalog (kết nối tới MinIO)
+CREATE CATALOG iceberg_catalog WITH (
+    'type' = 'iceberg',
+	'catalog-impl' = 'org.apache.iceberg.rest.RESTCatalog',
+    'uri' = 'http://iceberg-rest:8181',
+    'warehouse' = 's3://mimic-lakehouse/bronze',
+    'io-impl' = 'org.apache.iceberg.aws.s3.S3FileIO',
+    's3.endpoint' = 'http://minio1:9000',
+    's3.access-key-id' = 'minio',
+    's3.secret-access-key' = 'minio123',
+    's3.path-style-access' = 'true'
+);
+
+-- 3. Kiểm tra table đã tồn tại (optional)
+USE CATALOG iceberg_catalog;
+SHOW DATABASES;
+CREATE DATABASE IF NOT EXISTS bronze;
+
+-- 3. Tạo table Iceberg cho d_items
+USE bronze;
+
+CREATE TABLE iceberg_catalog.bronze.d_items (
+    itemid BIGINT,  -- Đổi thành BIGINT để match với data, cho phép NULL
+    label STRING,
+    abbreviation STRING,
+    linksto STRING,
+    category STRING,
+    unitname STRING,
+    param_type STRING,
+    lownormalvalue DOUBLE,
+    highnormalvalue DOUBLE
+) WITH (
+    'format-version' = '2',
+    'write.format.default' = 'parquet'
+);
+
+-- Kiểm tra table đã tạo
+SHOW TABLES FROM bronze;
+
+-- Xem schema của table hiện tại
+DESCRIBE bronze.d_items;
+
+-- 4. Insert CDC data từ Kafka vào Iceberg table
+-- Debezium format tự động xử lý INSERT/UPDATE/DELETE
+INSERT INTO iceberg_catalog.bronze.d_items
+SELECT 
+    itemid,
+    label,
+    abbreviation,
+    linksto,
+    category,
+    unitname,
+    param_type,
+    lownormalvalue,
+    highnormalvalue
+FROM default_catalog.default_database.kafka_d_items;
+
+
+
+DROP TABLE IF EXISTS iceberg_catalog.bronze.d_items;

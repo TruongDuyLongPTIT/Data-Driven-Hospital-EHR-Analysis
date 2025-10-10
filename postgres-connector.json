@@ -1,0 +1,28 @@
+{
+  "name": "postgres-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "tasks.max": "1",
+
+    "database.hostname": "postgres",
+    "database.port": "5432",
+    "database.user": "admin",
+    "database.password": "admin",
+    "database.dbname": "postgres",
+    "database.server.name": "postgres",
+
+    "table.include.list": "public.admissions,public.caregiver,public.chartevents,public.d_hcpcs,public.d_icd_diagnoses,public.d_icd_procedures,public.d_items,public.d_labitems,public.datetimeevents,public.diagnoses_icd,public.drgcodes,public.emar,public.emar_detail,public.hcpcsevents,public.icustays,public.ingredientevents,public.inputevents,public.labevents,public.microbiologyevents,public.omr,public.outputevents,public.patients,public.pharmacy,public.poe,public.poe_detail,public.prescriptions,public.procedureevents,public.procedures_icd,public.services,public.transfers",
+
+    "plugin.name": "pgoutput",
+    "topic.prefix": "postgres",
+    "slot.name": "debezium_slot",
+    "publication.name": "debezium_publication",
+    "publication.autocreate.mode": "disabled",
+    "snapshot.mode": "never",
+    "decimal.handling.mode": "string",
+    "time.precision.mode": "adaptive",
+    "heartbeat.interval.ms": "10000",
+    "topic.creation.default.partitions": 3,
+    "topic.creation.default.replication.factor": 1
+  }
+}

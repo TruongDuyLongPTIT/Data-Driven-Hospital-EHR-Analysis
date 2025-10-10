@@ -263,34 +263,48 @@ services:
 
   # ------------------ Apache Flink JobManager ------------------
   flink-jobmanager:
-    image: flink:1.18.1-scala_2.12-java11
+    image: flink-python
     container_name: flink-jobmanager
     hostname: flink-jobmanager
     ports:
-      - "8086:8081"  # Flink Web UI
-    command: jobmanager
+      - "8086:8081"
+    command: bash -c "cp -r /opt/flink/lib-extra/* /opt/flink/lib/ 2>/dev/null || true && /docker-entrypoint.sh jobmanager"
     environment:
+      - AWS_REGION=us-east-1
       - JOB_MANAGER_RPC_ADDRESS=flink-jobmanager
+      - AWS_ENDPOINT=http://minio:9000
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.memory.process.size: 1600m
+        taskmanager.numberOfTaskSlots: 4
     networks:
       - spark-net
     volumes:
       - ./flink/jobs:/opt/flink/usrlib
+      - ./flink/lib:/opt/flink/lib-extra:ro
     restart: unless-stopped
 
   # ------------------ Apache Flink TaskManager ------------------
   flink-taskmanager:
-    image: flink:1.18.1-scala_2.12-java11
+    image: flink-python
     container_name: flink-taskmanager
     hostname: flink-taskmanager
     depends_on:
       - flink-jobmanager
-    command: taskmanager
+    command: bash -c "cp -r /opt/flink/lib-extra/* /opt/flink/lib/ 2>/dev/null || true && /docker-entrypoint.sh taskmanager"
     environment:
+      - AWS_REGION=us-east-1
       - JOB_MANAGER_RPC_ADDRESS=flink-jobmanager
+      - AWS_ENDPOINT=http://minio:9000
+      - |
+        FLINK_PROPERTIES=
+        taskmanager.numberOfTaskSlots: 4
+        taskmanager.memory.process.size: 1728m
     networks:
       - spark-net
     volumes:
       - ./flink/jobs:/opt/flink/usrlib
+      - ./flink/lib:/opt/flink/lib-extra:ro
     restart: unless-stopped
 
   # ------------------ Airflow (Standalone) ------------------
